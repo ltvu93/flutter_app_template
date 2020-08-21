@@ -14,16 +14,7 @@ import 'package:provider/provider.dart';
 void main() {
   AppConfig.build(Environment.dev);
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<LocaleManager>(
-          create: (_) => LocaleManager(),
-        ),
-      ],
-      child: MyApp(),
-    ),
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -54,6 +45,9 @@ class _MyAppState extends State<MyApp> {
         ),
         Provider<UserService>(
           create: (context) => UserService(context.read<AppDio>()),
+        ),
+        ChangeNotifierProvider<LocaleManager>(
+          create: (_) => LocaleManager(),
         ),
       ],
       child: Consumer<LocaleManager>(
