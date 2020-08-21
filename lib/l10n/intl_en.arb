@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "title": "Hello",
+  "pageHomeWelcome": "Welcome {name}",
+  "pageHomeWelcomeGender": "{gender, select, male {Hi man!} female {Hi woman!} other {Hi there!}}",
+  "pageHomeWelcomeRole": "{role, select, admin {Hi admin!} manager {Hi manager!} other {Hi visitor!}}",
+  "pageNotificationsCount": "{howMany, plural, one{1 message} other{{howMany} messages}}",
+  "pageHomeWelcomeFullName": "Welcome {lastName} {firstName}",
+  "@pageHomeWelcomeFullName": {
+    "placeholders": {
+      "firstName": {},
+      "lastName": {}
+    }
+  },
+  "email": "Email",
+  "password": "Password",
+  "requiredValidateError": "{fieldName} is required",
+  "formatInvalidValidateError": "{fieldName} format is invalid",
+  "passwordValidateError": "The password field must be more than 7 characters and must include at least one number"
+}

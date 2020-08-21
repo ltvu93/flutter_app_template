@@ -1,0 +1,20 @@
+{
+  "@@locale": "vi",
+  "title": "Xin Chào",
+  "pageHomeWelcome": "Chào {name}",
+  "pageHomeWelcomeGender": "{gender, select, male {Chào anh!} female {Chào chị!} other {Chào bạn!}}",
+  "pageHomeWelcomeRole": "{role, select, admin {Chào admin!} manager {Chào manager!} other {Chào visitor!}}",
+  "pageNotificationsCount": "{howMany, plural, one{1 tin nhắn} other{{howMany} tin nhắn}}",
+  "pageHomeWelcomeFullName": "Welcome {lastName} {firstName}",
+  "@pageHomeWelcomeFullName": {
+    "placeholders": {
+      "firstName": {},
+      "lastName": {}
+    }
+  },
+  "email": "Email",
+  "password": "Mật khẩu",
+  "requiredValidateError": "{fieldName} không được bỏ trống",
+  "formatInvalidValidateError": "{fieldName} không hợp lệ",
+  "passwordValidateError": "Mật khẩu phải có số lượng ký tự lớn hơn 7 và có ít nhất 1 chữ số"
+}
