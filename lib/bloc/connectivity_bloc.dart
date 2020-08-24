@@ -10,18 +10,21 @@ enum NetworkStatus {
 }
 
 class ConnectivityBloc extends AppBloc {
-  final networkStatusSubject = BehaviorSubject<NetworkStatus>.seeded(NetworkStatus.offline);
+  final networkStatusSubject =
+      BehaviorSubject<NetworkStatus>.seeded(NetworkStatus.offline);
 
   ConnectivityBloc(DialogManager dialogManager) {
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      final networkStatus = _getNetworkStatusFromResult(result);
+    addSubscription(
+      Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+        final networkStatus = _getNetworkStatusFromResult(result);
 
-      networkStatusSubject.add(networkStatus);
+        networkStatusSubject.add(networkStatus);
 
-      if (networkStatus == NetworkStatus.offline) {
-        dialogManager.showAlert('Network error', 'You are offline!!!');
-      }
-    });
+        if (networkStatus == NetworkStatus.offline) {
+          dialogManager.showAlert('Network error', 'You are offline!!!');
+        }
+      }),
+    );
   }
 
   @override
