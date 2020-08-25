@@ -11,6 +11,19 @@ import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginScreen extends StatefulWidget {
+  static Widget content() {
+    return Provider<LoginBloc>(
+      create: (context) => LoginBloc(
+        context.read<ScreenNavigator>(),
+        context.read<DialogManager>(),
+        context.read<UserService>(),
+        context.read<TokenStorage>(),
+      ),
+      dispose: (_, loginBloc) => loginBloc.dispose(),
+      child: LoginScreen(),
+    );
+  }
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }

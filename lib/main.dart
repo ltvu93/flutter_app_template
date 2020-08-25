@@ -106,16 +106,7 @@ class AuthenticateGuard extends StatelessWidget {
           if (authenticateManager.isAuthenticated) {
             return HomeScreen();
           } else {
-            return Provider<LoginBloc>(
-              create: (context) => LoginBloc(
-                context.read<ScreenNavigator>(),
-                context.read<DialogManager>(),
-                context.read<UserService>(),
-                context.read<TokenStorage>(),
-              ),
-              dispose: (_, loginBloc) => loginBloc.dispose(),
-              child: LoginScreen(),
-            );
+            return LoginScreen.content();
           }
         }
       },
