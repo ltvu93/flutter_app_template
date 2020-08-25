@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/data/local/token_storage.dart';
 import 'package:flutter_app_template/dialog_manager.dart';
-import 'package:flutter_app_template/l10n_manual/app_localizations.dart';
-import 'package:flutter_app_template/l10n_manual/text_keys.dart';
 import 'package:flutter_app_template/models/api_error.dart';
 import 'package:flutter_app_template/screen_navigator.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +42,13 @@ class HomeScreen extends StatelessWidget {
                 context.read<ScreenNavigator>().goToChangeLanguageScreen();
               },
               child: Text('Change language'),
+            ),
+            RaisedButton(
+              onPressed: () async {
+                await context.read<TokenStorage>().clear();
+                context.read<ScreenNavigator>().goToLoginScreen();
+              },
+              child: Text('Logout'),
             ),
           ],
         ),

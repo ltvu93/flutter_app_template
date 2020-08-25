@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/data/local/token_storage.dart';
 import 'package:flutter_app_template/data/remote/user_service.dart';
 import 'package:flutter_app_template/dialog_manager.dart';
 import 'package:flutter_app_template/screens/change_language_screen.dart';
 import 'package:flutter_app_template/screens/home_screen.dart';
 import 'package:flutter_app_template/screens/load_more_screen.dart';
+import 'package:flutter_app_template/screens/login_screen.dart';
 import 'package:flutter_app_template/screens/setting_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +13,23 @@ class ScreenNavigator {
   final GlobalKey<NavigatorState> _navigatorKey;
 
   ScreenNavigator(this._navigatorKey);
+
+  void goToLoginScreen() {
+    _navigatorKey.currentState.pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => Provider<LoginBloc>(
+          create: (context) => LoginBloc(
+            context.read<ScreenNavigator>(),
+            context.read<DialogManager>(),
+            context.read<UserService>(),
+            context.read<TokenStorage>(),
+          ),
+          dispose: (_, loginBloc) => loginBloc.dispose(),
+          child: LoginScreen(),
+        ),
+      ),
+    );
+  }
 
   void goToHomeScreen() {
     _navigatorKey.currentState.push(

@@ -20,7 +20,11 @@ abstract class BaseService {
           case DioErrorType.SEND_TIMEOUT:
             throw NetworkTimeoutError();
           case DioErrorType.RESPONSE:
-            throw ServerError.fromJson(error.response.data['errors']);
+            if (error.response.statusCode == 401) {
+              throw UnAuthenticateError();
+            } else {
+              throw ServerError.fromJson(error.response.data['errors']);
+            }
             break;
           case DioErrorType.CANCEL:
             break;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/bloc/app_bloc.dart';
+import 'package:flutter_app_template/data/local/token_storage.dart';
 import 'package:flutter_app_template/data/remote/user_service.dart';
 import 'package:flutter_app_template/dialog_manager.dart';
 import 'package:flutter_app_template/generated/l10n.dart';
@@ -132,6 +133,7 @@ class LoginBloc extends AppBloc {
   final DialogManager dialogManager;
 
   final UserService userService;
+  final TokenStorage tokenStorage;
 
   final emailInputSubject = BehaviorSubject<String>();
   final passwordInputSubject = BehaviorSubject<String>();
@@ -159,6 +161,7 @@ class LoginBloc extends AppBloc {
     this.screenNavigator,
     this.dialogManager,
     this.userService,
+    this.tokenStorage,
   );
 
   @override
@@ -173,7 +176,9 @@ class LoginBloc extends AppBloc {
     try {
       dialogManager.showLoading();
 
-      final user = await userService.getUser('');
+      final token = await userService.login(userName, password);
+      await tokenStorage.saveToken(token);
+      final user = await userService.getUser();
 
       dialogManager.hideLoading();
 

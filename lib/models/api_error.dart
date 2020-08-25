@@ -4,6 +4,8 @@ class UnknownError extends ApiError {}
 
 class NetworkTimeoutError extends ApiError {}
 
+class UnAuthenticateError extends ApiError {}
+
 class ServerError extends ApiError {
   final List<ServerErrorContent> errors;
 

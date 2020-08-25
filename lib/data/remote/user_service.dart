@@ -15,7 +15,13 @@ class UserService extends BaseService {
 
   UserService(this.appDio);
 
-  Future<User> getUser(String userId) async {
+  Future<String> login(String userName, String password) async {
+    await Future.delayed(Duration(seconds: 2));
+
+    return 'fakeToken';
+  }
+
+  Future<User> getUser() async {
 //    final data = await transformResponse(
 //      () => appDio.get(
 //        UserEndpoints.getProfile,
@@ -24,6 +30,11 @@ class UserService extends BaseService {
 //        },
 //      ),
 //    );
+
+    final headers = await appDio.getAuthHeader();
+    if(headers['token'] == null){
+      throw UnAuthenticateError();
+    }
 
     await Future.delayed(Duration(seconds: 2));
 
