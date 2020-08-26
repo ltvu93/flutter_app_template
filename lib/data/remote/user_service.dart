@@ -16,7 +16,7 @@ class UserService extends BaseService {
   UserService(this.appDio);
 
   Future<String> login(String userName, String password) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     return 'fakeToken';
   }
@@ -32,11 +32,11 @@ class UserService extends BaseService {
 //    );
 
     final headers = await appDio.getAuthHeader();
-    if(headers['token'] == null){
+    if (headers['token'] == null) {
       throw UnAuthenticateError();
     }
 
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     if (Random().nextInt(5) == 0) {
       throw UnknownError();
@@ -54,9 +54,9 @@ class UserService extends BaseService {
     int page = 1,
     int itemsPerPage = 30,
   }) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
-    Map<String, dynamic> fakeResponse = {
+    final Map<String, dynamic> fakeResponse = {
       'data': List.generate(
         itemsPerPage,
         (index) => {

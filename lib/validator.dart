@@ -76,7 +76,7 @@ class Validator {
 
   static ValidateError password(String password) {
     ValidateError passwordError;
-    if (password.length >= 8 && password.contains(RegExp(r'[0-9]'))) {
+    if (password.length >= 8 && password.contains(RegExp('[0-9]'))) {
       passwordError = ValidateError.none;
     } else {
       passwordError = ValidateError.password;

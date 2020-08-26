@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocaleManager extends ChangeNotifier {
-  static final String _languageCodeKey = 'languageCode';
+  static const String _languageCodeKey = 'languageCode';
 
   Locale locale;
 
@@ -12,7 +12,7 @@ class LocaleManager extends ChangeNotifier {
     _loadLocale();
   }
 
-  void _loadLocale() async {
+  Future<void> _loadLocale() async {
     final prefs = await SharedPreferences.getInstance();
 
     final languageCode = prefs.getString(_languageCodeKey) ?? '';
@@ -20,12 +20,12 @@ class LocaleManager extends ChangeNotifier {
     if (languageCode.isNotEmpty) {
       locale = Locale(languageCode);
     } else {
-      locale = Locale('en');
+      locale = const Locale('en');
     }
     notifyListeners();
   }
 
-  void updateLocale(Locale newLocale) async {
+  Future<void> updateLocale(Locale newLocale) async {
     final prefs = await SharedPreferences.getInstance();
 
     final result =

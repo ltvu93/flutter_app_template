@@ -10,45 +10,45 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        title: const Text('Home Screen'),
       ),
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             RaisedButton(
               onPressed: () async {
                 context.read<DialogManager>().showError(UnknownError());
               },
-              child: Text('Show Error'),
+              child: const Text('Show Error'),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             RaisedButton(
               onPressed: () {
                 context.read<ScreenNavigator>().goToSettingScreen('John Done');
               },
-              child: Text('Go to Setting'),
+              child: const Text('Go to Setting'),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             RaisedButton(
               onPressed: () async {
                 context.read<ScreenNavigator>().goToLoadMoreScreen();
               },
-              child: Text('Go to load more'),
+              child: const Text('Go to load more'),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             RaisedButton(
               onPressed: () async {
                 context.read<ScreenNavigator>().goToChangeLanguageScreen();
               },
-              child: Text('Change language'),
+              child: const Text('Change language'),
             ),
             RaisedButton(
               onPressed: () async {
                 await context.read<TokenStorage>().clear();
                 context.read<ScreenNavigator>().goToLoginScreen();
               },
-              child: Text('Logout'),
+              child: const Text('Logout'),
             ),
           ],
         ),

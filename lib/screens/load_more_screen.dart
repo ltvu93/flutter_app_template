@@ -24,7 +24,7 @@ class LoadMoreScreen extends StatelessWidget {
             final firstTimeLoading = snapshot.data;
 
             if (firstTimeLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else {
@@ -61,7 +61,7 @@ class LoadMoreScreen extends StatelessWidget {
             },
           );
         } else {
-          return SizedBox();
+          return const SizedBox();
         }
       },
     );
@@ -75,7 +75,7 @@ class LoadMoreBloc extends AppBloc {
   final UserService userService;
 
   LoadMoreBloc(this.screenNavigator, this.dialogManager, this.userService) {
-    getUsers(currentPage: 1);
+    getUsers();
   }
 
   final firstTimeUsersLoadingSubject = BehaviorSubject<bool>.seeded(true);
@@ -90,7 +90,7 @@ class LoadMoreBloc extends AppBloc {
     pagingUsersSubject.close();
   }
 
-  void getUsers({int currentPage = 1}) async {
+  Future<void> getUsers({int currentPage = 1}) async {
     if (_isPagingCustomersLoading) {
       return;
     }

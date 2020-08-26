@@ -7,7 +7,7 @@ class PagingListView<T> extends StatefulWidget {
   final Widget loadingWidget;
   final VoidCallback onNeedLoadMore;
 
-  PagingListView({
+  const PagingListView({
     this.items,
     this.hasMoreItemsToLoad = true,
     this.itemBuilder,
@@ -20,7 +20,7 @@ class PagingListView<T> extends StatefulWidget {
 }
 
 class _PagingListViewState<T> extends State<PagingListView<T>> {
-  ScrollController scrollController = new ScrollController();
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _PagingListViewState<T> extends State<PagingListView<T>> {
           if (widget.hasMoreItemsToLoad) {
             return widget.loadingWidget ?? _buildDefaultLoading();
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         } else {
           return widget.itemBuilder(context, index, widget.items[index]);
@@ -65,8 +65,8 @@ class _PagingListViewState<T> extends State<PagingListView<T>> {
   }
 
   Widget _buildDefaultLoading() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Center(child: CircularProgressIndicator()),
     );
   }

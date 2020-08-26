@@ -7,13 +7,13 @@ class DialogManager {
 
   DialogManager(this._navigatorKey);
 
-  void showError(ApiError error) async {
+  Future<void> showError(ApiError error) async {
     await showDialog(
       context: _navigatorKey.currentState.overlay.context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Error'),
+          title: const Text('Error'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -23,10 +23,10 @@ class DialogManager {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
+              child: const Text('Ok'),
             ),
           ],
         );
@@ -47,7 +47,7 @@ class DialogManager {
     }
   }
 
-  void showLoading() async {
+  Future<void> showLoading() async {
     _isLoadingDialogShowing = true;
 
     await showDialog(
@@ -58,7 +58,7 @@ class DialogManager {
         backgroundColor: Colors.transparent,
         child: WillPopScope(
           onWillPop: () async => false,
-          child: Center(
+          child: const Center(
             child: CircularProgressIndicator(),
           ),
         ),
@@ -66,14 +66,14 @@ class DialogManager {
     );
   }
 
-  void hideLoading() async {
+  void hideLoading() {
     if (_isLoadingDialogShowing) {
-      await _navigatorKey.currentState.pop();
+      _navigatorKey.currentState.pop();
       _isLoadingDialogShowing = false;
     }
   }
 
-  void showAlert(String title, String message) async {
+  Future<void> showAlert(String title, String message) async {
     await showDialog(
       context: _navigatorKey.currentState.overlay.context,
       barrierDismissible: false,
@@ -89,10 +89,10 @@ class DialogManager {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
+              child: const Text('Ok'),
             ),
           ],
         );

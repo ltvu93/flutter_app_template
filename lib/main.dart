@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
         builder: (_, localeManager, __) {
           return MaterialApp(
             locale: localeManager.locale,
-            localizationsDelegates: [
+            localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
@@ -95,7 +95,7 @@ class AuthenticateGuard extends StatelessWidget {
     return Consumer<AuthenticateManager>(
       builder: (_, authenticateManager, __) {
         if (authenticateManager.isLoading) {
-          return Scaffold(
+          return const Scaffold(
             body: SafeArea(
               child: Center(
                 child: CircularProgressIndicator(),
@@ -126,11 +126,11 @@ class AuthenticateManager extends ChangeNotifier {
     authenticate();
   }
 
-  void authenticate() async {
+  Future<void> authenticate() async {
     try {
       isLoading = true;
       user = await userService.getUser();
-    } on UnAuthenticateError catch (error) {
+    } on UnAuthenticateError {
       user = null;
     } finally {
       isLoading = false;

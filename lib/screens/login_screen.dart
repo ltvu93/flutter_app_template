@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Screen'),
+        title: const Text('Login Screen'),
       ),
       body: SafeArea(
         child: Padding(
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               StreamBuilder<bool>(
                 stream: context.watch<LoginBloc>().isAllValidated,
                 builder: (_, snapshot) {
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   return RaisedButton(
                     onPressed: isValid ? _login : null,
-                    child: Text('Login'),
+                    child: const Text('Login'),
                   );
                 },
               ),
@@ -185,7 +185,7 @@ class LoginBloc extends AppBloc {
     super.dispose();
   }
 
-  void _login(String userName, String password) async {
+  Future<void> _login(String userName, String password) async {
     try {
       dialogManager.showLoading();
 

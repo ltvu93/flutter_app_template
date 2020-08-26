@@ -20,7 +20,7 @@ class AppConfig {
     );
   }
 
-  static build(Environment environment) {
+  static void build(Environment environment) {
     switch (environment) {
       case Environment.prod:
         instance = AppConfig._prod();

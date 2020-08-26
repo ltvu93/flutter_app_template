@@ -8,7 +8,9 @@ abstract class AppBloc {
   }
 
   void dispose() {
-    streamSubscriptions.forEach((subscription) => subscription.cancel());
+    for (final subscription in streamSubscriptions) {
+      subscription.cancel();
+    }
     streamSubscriptions.clear();
   }
 }

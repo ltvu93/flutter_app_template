@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 class SettingScreen extends StatelessWidget {
   final String settingId;
 
-  SettingScreen({this.settingId});
+  const SettingScreen({this.settingId});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SettingScreen extends StatelessWidget {
             onPressed: () {
               Provider.of(context)<ScreenNavigator>().goBack();
             },
-            child: Text('Back'),
+            child: const Text('Back'),
           ),
         ),
       ),

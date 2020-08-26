@@ -14,7 +14,7 @@ class AppLocalizations {
   }
 
   static Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations appLocalizations = AppLocalizations(locale);
+    final appLocalizations = AppLocalizations(locale);
 
 //    String jsonContent = await rootBundle.loadString(
 //      "locale/i18n_${locale.languageCode}.json",
@@ -29,8 +29,6 @@ class AppLocalizations {
         _localizedValues = en;
         break;
     }
-
-    print('$locale $_localizedValues');
 
     return appLocalizations;
   }
@@ -68,7 +66,8 @@ class DeviceLocalizationsDelegate
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   final Locale appLocale;
 
-  AppLocalizationsDelegate(Locale locale) : appLocale = locale ?? Locale('en');
+  AppLocalizationsDelegate(Locale locale)
+      : appLocale = locale ?? const Locale('en');
 
   @override
   bool isSupported(Locale locale) => appLocale != null;

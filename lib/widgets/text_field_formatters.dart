@@ -19,6 +19,7 @@ class CurrencyTextInputFormatter extends TextInputFormatter {
         );
   }
 
+  @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
     TextEditingValue newValue,
@@ -39,7 +40,7 @@ class CurrencyTextInputFormatter extends TextInputFormatter {
     }
 
     dynamic newInt = int.parse(newText);
-    var selectionIndexFromTheRight =
+    final selectionIndexFromTheRight =
         newValue.text.length - newValue.selection.end;
     if (currencyFormat.decimalDigits > 0) {
       newInt /= pow(10, currencyFormat.decimalDigits);
