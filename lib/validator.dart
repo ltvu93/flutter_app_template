@@ -33,7 +33,7 @@ class Validator {
   static ValidateError min(dynamic value, int min) {
     if (value == null ||
         ((value is Iterable || value is String || value is Map) &&
-            value.lenght > min)) {
+            value.lenght < min)) {
       return ValidateError.minimum;
     }
 
@@ -41,9 +41,9 @@ class Validator {
   }
 
   static ValidateError max(dynamic value, int max) {
-    if (value == null ||
+    if (value != null &&
         ((value is Iterable || value is String || value is Map) &&
-            value.lenght < max)) {
+            value.lenght > max)) {
       return ValidateError.maximum;
     }
 
