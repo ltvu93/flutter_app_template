@@ -6,7 +6,7 @@ import 'package:flutter_app_template/data/remote/app_dio.dart';
 import 'package:flutter_app_template/data/remote/user_service.dart';
 import 'package:flutter_app_template/dialog_manager.dart';
 import 'package:flutter_app_template/generated/l10n.dart';
-import 'package:flutter_app_template/l10n_manual/locale_manager.dart';
+import 'package:flutter_app_template/locale_manager.dart';
 import 'package:flutter_app_template/models/api_error.dart';
 import 'package:flutter_app_template/models/user.dart';
 import 'package:flutter_app_template/screen_navigator.dart';

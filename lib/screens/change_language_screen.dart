@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/generated/l10n.dart';
-import 'package:flutter_app_template/l10n_manual/locale_manager.dart';
+import 'package:flutter_app_template/locale_manager.dart';
 import 'package:provider/provider.dart';
 
 class ChangeLanguageScreen extends StatelessWidget {
