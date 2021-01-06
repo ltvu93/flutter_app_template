@@ -19,7 +19,7 @@ class Validator {
   static ValidateError required(dynamic value, {String errorText}) {
     if (value == null ||
         ((value is Iterable || value is String || value is Map) &&
-            value.lenght == 0)) {
+            value.length == 0)) {
       return ValidateError.required;
     }
 
@@ -33,7 +33,7 @@ class Validator {
   static ValidateError min(dynamic value, int min) {
     if (value == null ||
         ((value is Iterable || value is String || value is Map) &&
-            value.lenght < min)) {
+            value.length < min)) {
       return ValidateError.minimum;
     }
 
@@ -43,7 +43,7 @@ class Validator {
   static ValidateError max(dynamic value, int max) {
     if (value != null &&
         ((value is Iterable || value is String || value is Map) &&
-            value.lenght > max)) {
+            value.length > max)) {
       return ValidateError.maximum;
     }
 
@@ -60,31 +60,68 @@ class Validator {
         : ValidateError.none;
   }
 
-  static ValidateError _getError(List<ValidateError> errors) {
+  static ValidateError regexNotMatches(
+    String value,
+    RegExp regExp, {
+    ValidateError error,
+  }) {
+    return regExp.hasMatch(value)
+        ? error ?? ValidateError.invalidFormat
+        : ValidateError.none;
+  }
+
+  static ValidateError getError(List<ValidateError> errors) {
     return errors.firstWhere(
       (error) => error != ValidateError.none,
       orElse: () => ValidateError.none,
     );
   }
 
+  static ValidateError name(String name) {
+    return getError([
+      textRequired(name),
+      max(name, 30),
+      regexNotMatches(
+        name,
+        noneCharacterAndNumberRegExp,
+        error: ValidateError.noSpecialCharactersOrNumbersAllow,
+      ),
+    ]);
+  }
+
   static ValidateError email(String email) {
-    return _getError([
+    return getError([
       textRequired(email),
       regexMatches(email, emailRegExp),
     ]);
   }
 
-  static ValidateError password(String password) {
-    ValidateError passwordError;
-    if (password.length >= 8 && password.contains(RegExp('[0-9]'))) {
-      passwordError = ValidateError.none;
+  static ValidateError phone(String phone) {
+    ValidateError phoneError = ValidateError.none;
+    final rawPhoneNumber = phone.replaceAll(RegExp('[+ #*-.]'), '');
+    if (phone.contains(RegExp('[^0-9 ]'))) {
+      phoneError = ValidateError.invalidFormat;
+    }
+    if (phone.startsWith('84')) {
+      if (rawPhoneNumber.length != 11) {
+        phoneError = ValidateError.invalidFormat;
+      }
     } else {
-      passwordError = ValidateError.password;
+      if (rawPhoneNumber.length != 10) {
+        phoneError = ValidateError.invalidFormat;
+      }
     }
 
-    return _getError([
+    return getError([
+      textRequired(phone),
+      phoneError,
+    ]);
+  }
+
+  static ValidateError password(String password) {
+    return getError([
       textRequired(password),
-      passwordError,
+      min(password, 7),
     ]);
   }
 
@@ -92,21 +129,9 @@ class Validator {
     String confirmPassword,
     String password,
   ) {
-    return _getError([
+    return getError([
       Validator.password(confirmPassword),
       textMatches(confirmPassword, password),
-    ]);
-  }
-
-  static ValidateError name(String name) {
-    return _getError([
-      textRequired(name),
-      max(name, 100),
-      regexMatches(
-        name,
-        noneCharacterAndNumberRegExp,
-        error: ValidateError.noSpecialCharactersOrNumbersAllow,
-      ),
     ]);
   }
 }
@@ -124,14 +149,18 @@ enum ValidateError {
 }
 
 extension ValidateErrorExtension on ValidateError {
-  bool isNone() => this == ValidateError.none;
+  bool get isNone => this == ValidateError.none;
 
-  String getMessage(S localizations, String fieldName) {
+  String getMessage(
+    S appLocalizations,
+    String fieldName, {
+    int minMaxValue,
+  }) {
     switch (this) {
       case ValidateError.none:
         return null;
       case ValidateError.required:
-        return localizations.requiredValidateError(fieldName);
+        return appLocalizations.requiredValidateError(fieldName);
       case ValidateError.notMatches:
         return '';
       case ValidateError.minimum:
@@ -139,13 +168,13 @@ extension ValidateErrorExtension on ValidateError {
       case ValidateError.maximum:
         return '';
       case ValidateError.invalidFormat:
-        return localizations.formatInvalidValidateError(fieldName);
+        return appLocalizations.formatInvalidValidateError(fieldName);
       case ValidateError.noSpecialCharactersOrNumbersAllow:
         return '';
       case ValidateError.noSpecialCharactersAllow:
         return '';
       case ValidateError.password:
-        return localizations.passwordValidateError;
+        return appLocalizations.passwordValidateError;
       default:
         throw Exception("Don't support this type $this");
     }

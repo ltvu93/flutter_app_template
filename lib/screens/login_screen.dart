@@ -167,7 +167,7 @@ class LoginBloc extends AppBloc {
           ValidateError emailError,
           ValidateError passwordError,
         ) =>
-            emailError.isNone() && passwordError.isNone(),
+            emailError.isNone && passwordError.isNone,
       );
 
   LoginBloc(
