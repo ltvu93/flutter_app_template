@@ -187,18 +187,17 @@ class LoginBloc extends AppBloc {
 
   Future<void> _login(String userName, String password) async {
     try {
-      dialogManager.showLoading();
+      globalLoadingManager.show();
 
       final token = await userService.login(userName, password);
       await tokenStorage.saveToken(token);
       final user = await userService.getUser();
 
-      dialogManager.hideLoading();
-
       screenNavigator.goToHomeScreen();
     } on ApiError catch (error) {
-      dialogManager.hideLoading();
       dialogManager.showError(error);
+    } finally {
+      globalLoadingManager.hide();
     }
   }
 }

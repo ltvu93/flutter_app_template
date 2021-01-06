@@ -3,7 +3,6 @@ import 'package:flutter_app_template/models/api_error.dart';
 
 class DialogManager {
   final GlobalKey<NavigatorState> _navigatorKey;
-  bool _isLoadingDialogShowing = false;
 
   DialogManager(this._navigatorKey);
 
@@ -44,32 +43,6 @@ class DialogManager {
         return (apiError as ServerError).firstError ?? '';
       default:
         throw Exception("Don't support this type $apiError");
-    }
-  }
-
-  Future<void> showLoading() async {
-    _isLoadingDialogShowing = true;
-
-    await showDialog(
-      context: _navigatorKey.currentState.overlay.context,
-      barrierDismissible: false,
-      builder: (_) => Dialog(
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        child: WillPopScope(
-          onWillPop: () async => false,
-          child: const Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void hideLoading() {
-    if (_isLoadingDialogShowing) {
-      _navigatorKey.currentState.pop();
-      _isLoadingDialogShowing = false;
     }
   }
 
