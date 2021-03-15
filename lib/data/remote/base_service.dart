@@ -15,20 +15,19 @@ abstract class BaseService {
         debugPrint('DioError: ${error.message}');
 
         switch (error.type) {
-          case DioErrorType.CONNECT_TIMEOUT:
-          case DioErrorType.RECEIVE_TIMEOUT:
-          case DioErrorType.SEND_TIMEOUT:
+          case DioErrorType.connectTimeout:
+          case DioErrorType.sendTimeout:
+          case DioErrorType.receiveTimeout:
             throw NetworkTimeoutError();
-          case DioErrorType.RESPONSE:
-            if (error.response.statusCode == 401) {
+          case DioErrorType.response:
+            if (error.response!.statusCode == 401) {
               throw UnAuthenticateError();
             } else {
-              throw ServerError.fromJson(error.response.data['errors']);
+              throw ServerError.fromJson(error.response!.data['errors']);
             }
+          case DioErrorType.cancel:
             break;
-          case DioErrorType.CANCEL:
-            break;
-          case DioErrorType.DEFAULT:
+          case DioErrorType.other:
           default:
             throw UnknownError();
         }

@@ -21,7 +21,7 @@ class LoadMoreScreen extends StatelessWidget {
               .firstTimeUsersLoadingSubject
               .stream,
           builder: (context, snapshot) {
-            final firstTimeLoading = snapshot.data;
+            final firstTimeLoading = snapshot.data!;
 
             if (firstTimeLoading) {
               return const Center(
@@ -41,7 +41,7 @@ class LoadMoreScreen extends StatelessWidget {
       stream: Provider.of<LoadMoreBloc>(context).pagingUsersSubject.stream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final pagingUser = snapshot.data;
+          final pagingUser = snapshot.data!;
 
           return PagingListView<User>(
             items: pagingUser.items,
@@ -109,7 +109,7 @@ class LoadMoreBloc extends AppBloc {
         pagingUsersSubject.add(usersPagingData);
       } else {
         pagingUsersSubject.add(PagingData<User>(
-          items: [...pagingUsersSubject.value.items, ...usersPagingData.items],
+          items: [...pagingUsersSubject.value!.items, ...usersPagingData.items],
           currentPage: usersPagingData.currentPage,
           lastPage: usersPagingData.lastPage,
         ));

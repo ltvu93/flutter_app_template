@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_template/domain/global_loading_manager.dart';
 import 'package:provider/provider.dart';
 
-BuildContext _appContext;
+late BuildContext _appContext;
 
 void init(BuildContext context) => _appContext = context;
 

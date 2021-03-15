@@ -6,7 +6,7 @@ enum Environment {
 class AppConfig {
   final String apiBaseUrl;
 
-  AppConfig._({this.apiBaseUrl});
+  AppConfig._({required this.apiBaseUrl});
 
   factory AppConfig._dev() {
     return AppConfig._(
@@ -32,5 +32,5 @@ class AppConfig {
     }
   }
 
-  static AppConfig instance;
+  static late AppConfig instance;
 }

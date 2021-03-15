@@ -5,5 +5,9 @@ class PagingData<T> {
 
   bool get hasMoreItemsToLoad => currentPage < lastPage;
 
-  PagingData({this.items, this.currentPage, this.lastPage});
+  PagingData({
+    required this.items,
+    required this.currentPage,
+    required this.lastPage,
+  });
 }

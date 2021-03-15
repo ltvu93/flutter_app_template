@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocaleManager extends ChangeNotifier {
   static const String _languageCodeKey = 'languageCode';
 
-  Locale locale;
+  Locale? locale;
 
   LocaleManager() {
     _loadLocale();

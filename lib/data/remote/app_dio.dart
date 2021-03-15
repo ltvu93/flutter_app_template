@@ -7,7 +7,7 @@ import 'package:flutter_app_template/data/local/token_storage.dart';
 class AppDio with DioMixin implements Dio {
   final TokenStorage tokenStorage;
 
-  AppDio(this.tokenStorage, [BaseOptions options]) {
+  AppDio(this.tokenStorage, [BaseOptions? options]) {
     options = BaseOptions(
       baseUrl: AppConfig.instance.apiBaseUrl,
       contentType: 'application/json',
@@ -23,7 +23,7 @@ class AppDio with DioMixin implements Dio {
     httpClientAdapter = DefaultHttpClientAdapter();
   }
 
-  Future<Map<String, String>> getAuthHeader() async {
+  Future<Map<String, String?>> getAuthHeader() async {
     final token = await tokenStorage.getToken();
 
     return {

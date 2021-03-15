@@ -5,11 +5,11 @@ import 'package:intl/intl.dart';
 
 class CurrencyTextInputFormatter extends TextInputFormatter {
   final int maxNumbers;
-  NumberFormat currencyFormat;
+  late NumberFormat currencyFormat;
 
   CurrencyTextInputFormatter({
     this.maxNumbers = 15,
-    NumberFormat currencyFormat,
+    NumberFormat? currencyFormat,
   }) {
     this.currencyFormat = currencyFormat ??
         NumberFormat.currency(
@@ -42,8 +42,8 @@ class CurrencyTextInputFormatter extends TextInputFormatter {
     dynamic newInt = int.parse(newText);
     final selectionIndexFromTheRight =
         newValue.text.length - newValue.selection.end;
-    if (currencyFormat.decimalDigits > 0) {
-      newInt /= pow(10, currencyFormat.decimalDigits);
+    if (currencyFormat.decimalDigits! > 0) {
+      newInt /= pow(10, currencyFormat.decimalDigits!);
     }
     final newString = currencyFormat.format(newInt);
     return TextEditingValue(

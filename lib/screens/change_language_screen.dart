@@ -31,8 +31,8 @@ class ChangeLanguageScreen extends StatelessWidget {
                       leading: Radio<Locale>(
                         value: locale,
                         groupValue: localManager.locale,
-                        onChanged: (Locale value) {
-                          localManager.updateLocale(value);
+                        onChanged: (value) {
+                          localManager.updateLocale(value!);
                         },
                       ),
                       title: Text(locale.languageCode),

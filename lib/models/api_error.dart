@@ -9,17 +9,15 @@ class UnAuthenticateError extends ApiError {}
 class ServerError extends ApiError {
   final List<ServerErrorContent> errors;
 
-  ServerError({this.errors});
+  ServerError({required this.errors});
 
-  ServerErrorContent get firstError => errors.isNotEmpty ? errors[0] : null;
+  ServerErrorContent? get firstError => errors.isNotEmpty ? errors[0] : null;
 
-  factory ServerError.fromJson(Map<String, dynamic> json) {
-    final errorsJson = json['errors'];
-
+  factory ServerError.fromJson(Map<String, dynamic>? json) {
     return ServerError(
       errors: json != null
           ? List<ServerErrorContent>.from(
-              errorsJson.map(
+              json['errors'].map(
                 (x) => ServerErrorContent.fromJson(x),
               ),
             )
@@ -32,7 +30,10 @@ class ServerErrorContent {
   final int code;
   final String message;
 
-  ServerErrorContent({this.code, this.message});
+  ServerErrorContent({
+    required this.code,
+    required this.message,
+  });
 
   factory ServerErrorContent.fromJson(Map<String, dynamic> json) {
     return ServerErrorContent(

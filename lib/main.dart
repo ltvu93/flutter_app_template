@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
 
               return Stack(
                 children: [
-                  child,
+                  child!,
                   Consumer<GlobalLoadingManager>(
                     builder: (_, globalLoadingManager, __) {
                       if (globalLoadingManager.isLoading) {
@@ -144,8 +144,8 @@ class AuthenticateGuard extends StatelessWidget {
 class AuthenticateManager extends ChangeNotifier {
   UserService userService;
 
-  bool isLoading;
-  User user;
+  bool isLoading = false;
+  User? user;
 
   bool get isAuthenticated => user != null;
 

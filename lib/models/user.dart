@@ -2,7 +2,7 @@ class User {
   final String firstName;
   final String lastName;
 
-  User({this.firstName, this.lastName});
+  User({required this.firstName, required this.lastName});
 
   String get fullName => '$firstName $lastName'.trim();
 

@@ -14,7 +14,7 @@ class ScreenNavigator {
   ScreenNavigator(this._navigatorKey);
 
   void goToLoginScreen() {
-    _navigatorKey.currentState.pushReplacement(
+    _navigatorKey.currentState!.pushReplacement(
       MaterialPageRoute(
         builder: (context) => LoginScreen.content(),
       ),
@@ -22,7 +22,7 @@ class ScreenNavigator {
   }
 
   void goToHomeScreen() {
-    _navigatorKey.currentState.push(
+    _navigatorKey.currentState!.push(
       MaterialPageRoute(
         builder: (context) => HomeScreen(),
       ),
@@ -30,7 +30,7 @@ class ScreenNavigator {
   }
 
   void goToSettingScreen(String settingId) {
-    _navigatorKey.currentState.push(
+    _navigatorKey.currentState!.push(
       MaterialPageRoute(
         builder: (context) => SettingScreen(
           settingId: settingId,
@@ -40,7 +40,7 @@ class ScreenNavigator {
   }
 
   void goToLoadMoreScreen() {
-    _navigatorKey.currentState.push(
+    _navigatorKey.currentState!.push(
       MaterialPageRoute(
         builder: (context) => Provider<LoadMoreBloc>(
           create: (context) => LoadMoreBloc(
@@ -56,7 +56,7 @@ class ScreenNavigator {
   }
 
   void goToChangeLanguageScreen() {
-    _navigatorKey.currentState.push(
+    _navigatorKey.currentState!.push(
       MaterialPageRoute(
         builder: (context) => ChangeLanguageScreen(),
       ),
@@ -64,6 +64,6 @@ class ScreenNavigator {
   }
 
   void goBack() {
-    _navigatorKey.currentState.pop();
+    _navigatorKey.currentState!.pop();
   }
 }

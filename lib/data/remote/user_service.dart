@@ -78,11 +78,11 @@ class UserService extends BaseService {
             .map((json) => User.fromJson(json))
             .toList();
 
-    final currentPage = response["meta"]["current_page"] as int ?? -1;
-    final lastPage = response["meta"]["last_page"] as int ?? -1;
+    final currentPage = response["meta"]["current_page"] as int? ?? -1;
+    final lastPage = response["meta"]["last_page"] as int? ?? -1;
 
     return PagingData<User>(
-      items: users,
+      items: users as List<User>,
       currentPage: currentPage,
       lastPage: lastPage,
     );

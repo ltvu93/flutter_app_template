@@ -8,7 +8,7 @@ class DialogManager {
 
   Future<void> showError(ApiError error) async {
     await showDialog(
-      context: _navigatorKey.currentState.overlay.context,
+      context: _navigatorKey.currentState!.overlay!.context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -40,7 +40,7 @@ class DialogManager {
       case NetworkTimeoutError:
         return 'Connection time out.';
       case ServerError:
-        return (apiError as ServerError).firstError ?? '';
+        return (apiError as ServerError).firstError as String? ?? '';
       default:
         throw Exception("Don't support this type $apiError");
     }
@@ -48,7 +48,7 @@ class DialogManager {
 
   Future<void> showAlert(String title, String message) async {
     await showDialog(
-      context: _navigatorKey.currentState.overlay.context,
+      context: _navigatorKey.currentState!.overlay!.context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(

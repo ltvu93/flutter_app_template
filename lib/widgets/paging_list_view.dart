@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class PagingListView<T> extends StatefulWidget {
   final List<T> items;
   final bool hasMoreItemsToLoad;
-  final Function(BuildContext context, int index, T data) itemBuilder;
-  final Widget loadingWidget;
-  final VoidCallback onNeedLoadMore;
+  final Function(BuildContext context, int index, T data)? itemBuilder;
+  final Widget? loadingWidget;
+  final VoidCallback? onNeedLoadMore;
 
   const PagingListView({
-    this.items,
+    this.items = const [],
     this.hasMoreItemsToLoad = true,
     this.itemBuilder,
     this.loadingWidget,
@@ -30,7 +30,7 @@ class _PagingListViewState<T> extends State<PagingListView<T>> {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         if (widget.onNeedLoadMore != null && widget.hasMoreItemsToLoad) {
-          widget.onNeedLoadMore();
+          widget.onNeedLoadMore!();
         }
       }
     });
@@ -58,7 +58,7 @@ class _PagingListViewState<T> extends State<PagingListView<T>> {
             return const SizedBox();
           }
         } else {
-          return widget.itemBuilder(context, index, widget.items[index]);
+          return widget.itemBuilder!(context, index, widget.items[index]);
         }
       },
     );

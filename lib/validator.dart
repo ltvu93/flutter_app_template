@@ -11,12 +11,12 @@ class Validator {
   static final passwordRegExp = RegExp(r'[^\p{L}0-9 ]', unicode: true);
 
   static ValidateError textRequired(String value) {
-    return value == null || value.isEmpty
+    return value.isEmpty
         ? ValidateError.required
         : ValidateError.none;
   }
 
-  static ValidateError required(dynamic value, {String errorText}) {
+  static ValidateError required(dynamic value) {
     if (value == null ||
         ((value is Iterable || value is String || value is Map) &&
             value.length == 0)) {
@@ -53,7 +53,7 @@ class Validator {
   static ValidateError regexMatches(
     String value,
     RegExp regExp, {
-    ValidateError error,
+    ValidateError? error,
   }) {
     return !regExp.hasMatch(value)
         ? error ?? ValidateError.invalidFormat
@@ -63,7 +63,7 @@ class Validator {
   static ValidateError regexNotMatches(
     String value,
     RegExp regExp, {
-    ValidateError error,
+    ValidateError? error,
   }) {
     return regExp.hasMatch(value)
         ? error ?? ValidateError.invalidFormat
@@ -151,10 +151,10 @@ enum ValidateError {
 extension ValidateErrorExtension on ValidateError {
   bool get isNone => this == ValidateError.none;
 
-  String getMessage(
+  String? getMessage(
     S appLocalizations,
     String fieldName, {
-    int minMaxValue,
+    int? minMaxValue,
   }) {
     switch (this) {
       case ValidateError.none:
